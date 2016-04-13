@@ -12,6 +12,7 @@
 		2E2965181CBEC0B400E86838 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E2965161CBEC0B400E86838 /* Main.storyboard */; };
 		2E29651A1CBEC0B400E86838 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E2965191CBEC0B400E86838 /* Assets.xcassets */; };
 		2E29651D1CBEC0B400E86838 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E29651B1CBEC0B400E86838 /* LaunchScreen.storyboard */; };
+		2E2965251CBED48100E86838 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2965241CBED48100E86838 /* Items.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		2E2965191CBEC0B400E86838 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E29651C1CBEC0B400E86838 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E29651E1CBEC0B400E86838 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2E2965241CBED48100E86838 /* Items.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				2E2965121CBEC0B400E86838 /* AppDelegate.swift */,
 				2E2965141CBEC0B400E86838 /* ViewController.swift */,
+				2E2965241CBED48100E86838 /* Items.swift */,
 				2E2965161CBEC0B400E86838 /* Main.storyboard */,
 				2E2965191CBEC0B400E86838 /* Assets.xcassets */,
 				2E29651B1CBEC0B400E86838 /* LaunchScreen.storyboard */,
@@ -96,6 +99,7 @@
 				TargetAttributes = {
 					2E29650E1CBEC0B400E86838 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = FZ89A5SZ7C;
 					};
 				};
 			};
@@ -136,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E2965151CBEC0B400E86838 /* ViewController.swift in Sources */,
+				2E2965251CBED48100E86838 /* Items.swift in Sources */,
 				2E2965131CBEC0B400E86838 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,6 +254,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Space Agency/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "tech.calstephens.Space-Agency";
@@ -260,6 +266,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Space Agency/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "tech.calstephens.Space-Agency";
