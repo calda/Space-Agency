@@ -73,8 +73,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        let width = (UIScreen.mainScreen().bounds.width / 2) - 10
+        let width = (UIScreen.mainScreen().bounds.width / 2) - 15
         return CGSizeMake(width, width)
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(10, 0, 10, 0)
     }
     
 }
@@ -89,7 +101,7 @@ class ItemCell : UICollectionViewCell {
     func decorateForItem(item: Item) {
         
         nameLabel.text = item.name
-        //image.image = UIImage(named: item.name)
+        image.image = UIImage(named: item.name)
         subtitleLabel.text = "\(item.price.formatedAsMoney()) for \(item.income.formatedAsMoney())/day"
         countLabel.text = "x \(item.count)"
     }
