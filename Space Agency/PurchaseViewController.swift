@@ -10,12 +10,12 @@ import UIKit
 
 func displayBuyControllerForItem(item: Item, inController controller: UIViewController, atOffset offset: CGFloat, completion: ((count: Int, item: Item) -> ())?) -> UIViewController {
     
-    let buyController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("buy") as! PurchaseViewController
-    buyController.loadView()
+    let textController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("buy") as! PurchaseViewController
+    textController.loadView()
     
-    buyController.displayForItem(item, inController: controller, atOffset: offset, completion: completion)
+    textController.displayForItem(item, inController: controller, atOffset: offset, completion: completion)
     
-    return buyController
+    return textController
 }
 
 class PurchaseViewController : UIViewController {

@@ -40,6 +40,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     //MARK: - Animations
     
     func updateLabels() {
+        //update income and balance
         let balanceString = SABalance.formatedAsMoney()
         let incomeString = "\(SAIncome.formatedAsMoney()) per day"
         
@@ -59,6 +60,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         if incomeLabel.text != incomeString {
             animateChange(incomeLabel, to: incomeString)
         }
+        
+        //update collection view
+        for cell in collectionView.visibleCells() where cell is ItemCell {
+            (cell as! ItemCell).updateLabels()
+        }
     }
 
     //MARK: - User Interaction
@@ -67,6 +73,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         let index = indexPath.item
         let item = SAItems[index]
+        let view = collectionView.cellForItemAtIndexPath(indexPath)!
+        
+        //animate
+        if item.price > SABalance {
+            shakeView(view)
+            return
+        }
+        
+        view.pulseToSize(0.975, growFor: 0.3, shrinkFor: 0.3)
+        
+        //show modal popup & handle completion logic
         controllerToRetain = displayBuyControllerForItem(item, inController: self, atOffset: 0, completion: { count, item in
             
             self.controllerToRetain = nil
@@ -79,8 +96,28 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             SAIncome += newIncome
             item.count += count
             
+            //update and animate
             collectionView.reloadData()
             self.updateLabels()
+            
+            delay(0.1) {
+                if count == 0 { return }
+                
+                collectionView.visibleCells().filter {
+                    ($0 as? ItemCell)?.item.name == item.name
+                }.first?.pulseToSize(1.05, growFor: 0.25, shrinkFor: 0.35)
+                
+            }
+            
+            //if this was the first purchase
+            if item.count == count && count != 0{
+                //display flavor text
+                delay(0.75) {
+                    self.controllerToRetain = displayTextControllerForText(item.description, title: "Bought \(item.name)", buttonText: "Continue", inController: self, completion: {
+                            self.controllerToRetain = nil
+                    })
+                }
+            }
             
         })
         
@@ -89,7 +126,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     //MARK: - Collection View delegate
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return SAItems.count;
+        
+        if let lastOwned = SAItems.filter({ $0.count > 0 }).last {
+            return min(SAItems.indexOf{ $0.name == lastOwned.name }! + 3, SAItems.count)
+        }
+        return 3 //show 3 at minimum
+        
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -125,59 +167,26 @@ class ItemCell : UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var subtitleLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
+    @IBOutlet weak var scrim: UIView!
+    var item: Item!
     
     func decorateForItem(item: Item) {
-        
-        nameLabel.text = item.name
+        self.item = item
         image.image = UIImage(named: item.name)
-        subtitleLabel.text = "\(item.price.formatedAsMoney()) for \(item.income.formatedAsMoney())/day"
-        countLabel.text = "x \(item.count)"
+        updateLabels()
         
         self.layer.borderColor = UIColor.lightGrayColor().CGColor
         self.layer.borderWidth = 0.5
     }
     
-}
-
-extension Int {
-    
-    func formatedAsMoney() -> String {
-        let numberString = "\(self)" as NSString
-        var moneyString = ""
+    func updateLabels() {
+        let canAfford = item.price <= SABalance
+        scrim.alpha = canAfford || item.count > 0 ? 0.0 : 0.65
         
-        var index = 0
-        while index != numberString.length {
-            
-            //prepend character
-            let range = NSMakeRange(numberString.length - index - 1, 1)
-            let char = numberString.substringWithRange(range)
-            moneyString = "\(char)\(moneyString)"
-            
-            index += 1;
-            //prepend comma if necessary
-            if index % 3 == 0 && index != numberString.length {
-                moneyString = ",\(moneyString)"
-            }
-            
-        }
+        nameLabel.text = item.name
         
-        return "$\(moneyString)"
-    }
-}
-
-extension UIView {
-    
-    func pulseToSize(size: CGFloat, growFor grow: NSTimeInterval, shrinkFor shrink: NSTimeInterval) {
-        
-        //animate
-        UIView.animateWithDuration(grow, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [.AllowUserInteraction], animations: {
-                self.transform = CGAffineTransformMakeScale(1.2, 1.2)
-        }, completion: nil)
-        
-        UIView.animateWithDuration(shrink, delay: grow, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [.AllowUserInteraction], animations: {
-                self.transform = CGAffineTransformIdentity
-        }, completion: nil)
-        
+        subtitleLabel.text = "\(item.price.formatedAsMoney()) for \(item.income.formatedAsMoney())/day"
+        countLabel.text = "x \(item.count)"
     }
     
 }

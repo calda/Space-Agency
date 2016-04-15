@@ -547,6 +547,29 @@ extension Int {
         else if length == 2 { return "0\(start)" }
         else { return start }
     }
+    
+    func formatedAsMoney() -> String {
+        let numberString = "\(self)" as NSString
+        var moneyString = ""
+        
+        var index = 0
+        while index != numberString.length {
+            
+            //prepend character
+            let range = NSMakeRange(numberString.length - index - 1, 1)
+            let char = numberString.substringWithRange(range)
+            moneyString = "\(char)\(moneyString)"
+            
+            index += 1;
+            //prepend comma if necessary
+            if index % 3 == 0 && index != numberString.length {
+                moneyString = ",\(moneyString)"
+            }
+            
+        }
+        
+        return "$\(moneyString)"
+    }
 }
 
 extension NSObject {
@@ -634,6 +657,19 @@ extension UIView {
     
     static func animateWithDuration(duration: NSTimeInterval, delay: NSTimeInterval, usingSpringWithDamping damping: CGFloat, animations: () -> ()) {
         UIView.animateWithDuration(duration, delay: delay, usingSpringWithDamping: damping, initialSpringVelocity: 0.0, options: [], animations: animations, completion: nil)
+    }
+    
+    func pulseToSize(size: CGFloat, growFor grow: NSTimeInterval, shrinkFor shrink: NSTimeInterval) {
+        
+        //animate
+        UIView.animateWithDuration(grow, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [.AllowUserInteraction], animations: {
+            self.transform = CGAffineTransformMakeScale(size, size)
+        }, completion: nil)
+        
+        UIView.animateWithDuration(shrink, delay: grow, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [.AllowUserInteraction], animations: {
+            self.transform = CGAffineTransformIdentity
+        }, completion: nil)
+        
     }
     
 }

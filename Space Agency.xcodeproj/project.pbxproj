@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E00C20E1CC19BA0007F12B6 /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E00C20D1CC19BA0007F12B6 /* TextViewController.swift */; };
 		2E2965131CBEC0B400E86838 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2965121CBEC0B400E86838 /* AppDelegate.swift */; };
 		2E2965151CBEC0B400E86838 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2965141CBEC0B400E86838 /* ViewController.swift */; };
 		2E2965181CBEC0B400E86838 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E2965161CBEC0B400E86838 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E00C20D1CC19BA0007F12B6 /* TextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		2E29650F1CBEC0B400E86838 /* Space Agency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Agency.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E2965121CBEC0B400E86838 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E2965141CBEC0B400E86838 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				2E29651B1CBEC0B400E86838 /* LaunchScreen.storyboard */,
 				2E29651E1CBEC0B400E86838 /* Info.plist */,
 				2E63AD011CC08F1B00554C5D /* CoreSwift.swift */,
+				2E00C20D1CC19BA0007F12B6 /* TextViewController.swift */,
 			);
 			path = "Space Agency";
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 				2E8B26CB1CC0840100E16D84 /* PurchaseViewController.swift in Sources */,
 				2E2965251CBED48100E86838 /* Items.swift in Sources */,
 				2E2965131CBEC0B400E86838 /* AppDelegate.swift in Sources */,
+				2E00C20E1CC19BA0007F12B6 /* TextViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
