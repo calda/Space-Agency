@@ -13,6 +13,8 @@
 		2E29651A1CBEC0B400E86838 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E2965191CBEC0B400E86838 /* Assets.xcassets */; };
 		2E29651D1CBEC0B400E86838 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E29651B1CBEC0B400E86838 /* LaunchScreen.storyboard */; };
 		2E2965251CBED48100E86838 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2965241CBED48100E86838 /* Items.swift */; };
+		2E63AD021CC08F1B00554C5D /* CoreSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E63AD011CC08F1B00554C5D /* CoreSwift.swift */; };
+		2E8B26CB1CC0840100E16D84 /* PurchaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8B26CA1CC0840100E16D84 /* PurchaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		2E29651C1CBEC0B400E86838 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E29651E1CBEC0B400E86838 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E2965241CBED48100E86838 /* Items.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
+		2E63AD011CC08F1B00554C5D /* CoreSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreSwift.swift; sourceTree = "<group>"; };
+		2E8B26CA1CC0840100E16D84 /* PurchaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurchaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +62,13 @@
 			children = (
 				2E2965121CBEC0B400E86838 /* AppDelegate.swift */,
 				2E2965141CBEC0B400E86838 /* ViewController.swift */,
+				2E8B26CA1CC0840100E16D84 /* PurchaseViewController.swift */,
 				2E2965241CBED48100E86838 /* Items.swift */,
 				2E2965161CBEC0B400E86838 /* Main.storyboard */,
 				2E2965191CBEC0B400E86838 /* Assets.xcassets */,
 				2E29651B1CBEC0B400E86838 /* LaunchScreen.storyboard */,
 				2E29651E1CBEC0B400E86838 /* Info.plist */,
+				2E63AD011CC08F1B00554C5D /* CoreSwift.swift */,
 			);
 			path = "Space Agency";
 			sourceTree = "<group>";
@@ -140,6 +146,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E2965151CBEC0B400E86838 /* ViewController.swift in Sources */,
+				2E63AD021CC08F1B00554C5D /* CoreSwift.swift in Sources */,
+				2E8B26CB1CC0840100E16D84 /* PurchaseViewController.swift in Sources */,
 				2E2965251CBED48100E86838 /* Items.swift in Sources */,
 				2E2965131CBEC0B400E86838 /* AppDelegate.swift in Sources */,
 			);
@@ -255,10 +263,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Space Agency/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "tech.calstephens.Space-Agency";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -267,10 +277,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Space Agency/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "tech.calstephens.Space-Agency";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -293,6 +305,7 @@
 				2E2965231CBEC0B400E86838 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

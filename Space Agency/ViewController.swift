@@ -10,7 +10,7 @@ import UIKit
 
 //MARK: Game Variables
 var SABalance = 0
-var SAIncome = 10
+var SAIncome = 0
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -18,12 +18,20 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var incomeLabel: UILabel!
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+    
     override func viewDidLoad() {
         
         //schedule the income timer
         self.incomeTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(self.incomeTick(_:)), userInfo: nil, repeats: true)
         
         NSRunLoop.currentRunLoop().addTimer(self.incomeTimer, forMode: NSRunLoopCommonModes)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        displayBuyControllerForItem(SAItems[4], inController: self, atOffset: 0, completion: nil)
     }
 
     func incomeTick(timer: NSTimer) {
@@ -39,10 +47,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         func animateChange(label: UILabel, to: String) {
             label.text = to
-            
-            UIView.animateWithDuration(0.15, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [], animations: {
-                    label.transform = CGAffineTransformMakeScale(1.2, 1.2)
-            }, completion: nil)
+            label.pulseToSize(1.2, growFor: 0.15, shrinkFor: 0.5)
             
             UIView.animateWithDuration(0.5, delay: 0.2, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [], animations: {
                     label.transform = CGAffineTransformIdentity
@@ -86,7 +91,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsMake(10, 0, 10, 0)
+        return UIEdgeInsetsMake(10, 10, 10, 10)
     }
     
 }
@@ -104,6 +109,9 @@ class ItemCell : UICollectionViewCell {
         image.image = UIImage(named: item.name)
         subtitleLabel.text = "\(item.price.formatedAsMoney()) for \(item.income.formatedAsMoney())/day"
         countLabel.text = "x \(item.count)"
+        
+        self.layer.borderColor = UIColor.lightGrayColor().CGColor
+        self.layer.borderWidth = 0.5
     }
     
 }
@@ -132,5 +140,22 @@ extension Int {
         
         return "$\(moneyString)"
     }
+}
+
+extension UIView {
+    
+    func pulseToSize(size: CGFloat, growFor grow: NSTimeInterval, shrinkFor shrink: NSTimeInterval) {
+        
+        //animate
+        UIView.animateWithDuration(grow, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [.AllowUserInteraction], animations: {
+                self.transform = CGAffineTransformMakeScale(1.2, 1.2)
+        }, completion: nil)
+        
+        UIView.animateWithDuration(shrink, delay: grow, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [.AllowUserInteraction], animations: {
+                self.transform = CGAffineTransformIdentity
+        }, completion: nil)
+        
+    }
+    
 }
 
