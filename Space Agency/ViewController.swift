@@ -9,7 +9,7 @@
 import UIKit
 
 //MARK: Game Variables
-var SABalance = 0
+var SABalance = 100
 var SAIncome = 0
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -17,6 +17,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var incomeTimer: NSTimer!
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var incomeLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
+    var controllerToRetain: UIViewController!
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
@@ -28,10 +30,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.incomeTimer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(self.incomeTick(_:)), userInfo: nil, repeats: true)
         
         NSRunLoop.currentRunLoop().addTimer(self.incomeTimer, forMode: NSRunLoopCommonModes)
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        displayBuyControllerForItem(SAItems[4], inController: self, atOffset: 0, completion: nil)
     }
 
     func incomeTick(timer: NSTimer) {
@@ -63,6 +61,31 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         }
     }
 
+    //MARK: - User Interaction
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        
+        let index = indexPath.item
+        let item = SAItems[index]
+        controllerToRetain = displayBuyControllerForItem(item, inController: self, atOffset: 0, completion: { count, item in
+            
+            self.controllerToRetain = nil
+            
+            let cost = count * item.price
+            if SABalance < cost { return } //TODO: throw some error
+            SABalance -= cost
+            
+            let newIncome = count * item.income
+            SAIncome += newIncome
+            item.count += count
+            
+            collectionView.reloadData()
+            self.updateLabels()
+            
+        })
+        
+    }
+    
     //MARK: - Collection View delegate
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

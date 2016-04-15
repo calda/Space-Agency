@@ -28,7 +28,7 @@ class Item {
     let description: String
     
     var unlocked: Bool = false
-    let count = 0
+    var count = 0
     
     init(name: String, income: Int, price: Int, desc: String) {
         self.name = name

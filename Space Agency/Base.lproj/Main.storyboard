@@ -268,6 +268,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="balanceLabel" destination="HWi-gX-CAp" id="Ue3-lN-A82"/>
+                        <outlet property="collectionView" destination="KnW-wa-iOL" id="XPP-1E-B1M"/>
                         <outlet property="incomeLabel" destination="yB7-g8-yQS" id="bow-zS-7Y1"/>
                     </connections>
                 </viewController>
@@ -291,28 +292,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.60258620689655173" colorSpace="calibratedRGB"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Oi-VY-0FW" userLabel="modal">
-                                <rect key="frame" x="0.0" y="125" width="320" height="229"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Oi-VY-0FW" userLabel="modal">
+                                <rect key="frame" x="-0.5" y="125" width="320" height="229"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BVz-b3-kco" userLabel="title bg">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy Fireworks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6i1-hR-7hc">
-                                                <rect key="frame" x="8" y="12" width="304" height="36"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.69803921570000005" green="0.1019607843" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="6lb-aU-Hg5"/>
-                                            <constraint firstAttribute="trailing" secondItem="6i1-hR-7hc" secondAttribute="trailing" constant="8" id="VoM-yX-KLN"/>
-                                            <constraint firstItem="6i1-hR-7hc" firstAttribute="leading" secondItem="BVz-b3-kco" secondAttribute="leading" constant="8" id="loe-jv-yJm"/>
-                                            <constraint firstAttribute="bottom" secondItem="6i1-hR-7hc" secondAttribute="bottom" constant="12" id="rJN-Th-J9z"/>
-                                            <constraint firstItem="6i1-hR-7hc" firstAttribute="top" secondItem="BVz-b3-kco" secondAttribute="top" constant="12" id="xpt-nM-FbF"/>
-                                        </constraints>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xDx-PZ-dCG" userLabel="content bg">
                                         <rect key="frame" x="0.0" y="60" width="320" height="129"/>
                                         <subviews>
@@ -395,17 +377,6 @@
                                             <constraint firstItem="CyC-06-n5K" firstAttribute="leading" secondItem="xDx-PZ-dCG" secondAttribute="leading" id="jMr-T2-xDL"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOH-fm-nPA">
-                                        <rect key="frame" x="160" y="189" width="160" height="40"/>
-                                        <color key="backgroundColor" red="0.69803921570000005" green="0.1019607843" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="OPP-Cy-8ak"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                        <state key="normal" title="Buy">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dR0-Ar-A3b">
                                         <rect key="frame" x="0.0" y="189" width="160" height="40"/>
                                         <color key="backgroundColor" red="0.63790416717529297" green="0.63788503408432007" blue="0.63789582252502441" alpha="1" colorSpace="calibratedRGB"/>
@@ -416,6 +387,42 @@
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="completePurchase:" destination="o7n-7j-Qdh" eventType="touchUpInside" id="c3n-3j-f9M"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BVz-b3-kco" userLabel="title bg">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buy Fireworks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6i1-hR-7hc">
+                                                <rect key="frame" x="8" y="12" width="304" height="36"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.69803921570000005" green="0.1019607843" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="6lb-aU-Hg5"/>
+                                            <constraint firstAttribute="trailing" secondItem="6i1-hR-7hc" secondAttribute="trailing" constant="8" id="VoM-yX-KLN"/>
+                                            <constraint firstItem="6i1-hR-7hc" firstAttribute="leading" secondItem="BVz-b3-kco" secondAttribute="leading" constant="8" id="loe-jv-yJm"/>
+                                            <constraint firstAttribute="bottom" secondItem="6i1-hR-7hc" secondAttribute="bottom" constant="12" id="rJN-Th-J9z"/>
+                                            <constraint firstItem="6i1-hR-7hc" firstAttribute="top" secondItem="BVz-b3-kco" secondAttribute="top" constant="12" id="xpt-nM-FbF"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOH-fm-nPA">
+                                        <rect key="frame" x="160" y="189" width="160" height="40"/>
+                                        <color key="backgroundColor" red="0.69803921570000005" green="0.1019607843" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="OPP-Cy-8ak"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                        <state key="normal" title="Buy">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="completePurchase:" destination="o7n-7j-Qdh" eventType="touchUpInside" id="yR6-fG-5kh"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -437,6 +444,11 @@
                                     <constraint firstItem="dR0-Ar-A3b" firstAttribute="leading" secondItem="2Oi-VY-0FW" secondAttribute="leading" id="st6-H4-3LB"/>
                                     <constraint firstAttribute="width" secondItem="2Oi-VY-0FW" secondAttribute="height" multiplier="60:43" id="tPf-3X-SRV"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="XsK-Xf-PLn"/>
