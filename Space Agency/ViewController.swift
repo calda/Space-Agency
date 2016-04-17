@@ -12,6 +12,10 @@ import UIKit
 var SABalance = 100
 var SAIncome = 0
 
+protocol TickListener {
+    func tick()
+}
+
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var incomeTimer: NSTimer!
@@ -35,6 +39,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     func incomeTick(timer: NSTimer) {
         SABalance += SAIncome
         updateLabels()
+        (controllerToRetain as? TickListener)?.tick()
     }
     
     //MARK: - Animations
@@ -130,7 +135,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         if let lastOwned = SAItems.filter({ $0.count > 0 }).last {
             return min(SAItems.indexOf{ $0.name == lastOwned.name }! + 3, SAItems.count)
         }
-        return 3 //show 3 at minimum
+        return 3 //show 3 at minimum*/ return SAItems.count
         
     }
     
@@ -186,7 +191,7 @@ class ItemCell : UICollectionViewCell {
         nameLabel.text = item.name
         
         subtitleLabel.text = "\(item.price.formatedAsMoney()) for \(item.income.formatedAsMoney())/day"
-        countLabel.text = "x \(item.count)"
+        countLabel.text = "x\(item.count)"
     }
     
 }

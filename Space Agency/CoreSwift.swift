@@ -549,7 +549,35 @@ extension Int {
     }
     
     func formatedAsMoney() -> String {
-        let numberString = "\(self)" as NSString
+        var numberString = "\(self)" as NSString
+        var suffix: String? = nil
+        var decimals: String? = nil
+        
+        //add a suffix if the number is greater than a million
+        if numberString.length > 6 {
+            let endings = ["k", "m", "b", "tr", "mb", "bb", "trb", "mtr", "btr", "trtr"]
+            
+            var currentSuffix = 0
+            while numberString.length > 3 {
+                numberString = numberString.substringToIndex(numberString.length - 3)
+                suffix = endings[currentSuffix]
+                currentSuffix += 1
+            }
+        }
+        
+        //add back a decimal so the text is atleast 4 digits long
+        if (suffix != nil) {
+            let newLength = numberString.length
+            var decimalStr = (("\(self)" as NSString).substringFromIndex(newLength) as NSString).substringToIndex(4 - numberString.length)
+            
+            //remove trailing 0s
+            while decimalStr != "0" && "\(decimalStr.characters.last!)" == "0" {
+                decimalStr = decimalStr.substringToIndex(decimalStr.endIndex.predecessor())
+            }
+            
+            if decimalStr != "" && decimalStr != "0" { decimals = ".\(decimalStr)" }
+        }
+        
         var moneyString = ""
         
         var index = 0
@@ -568,7 +596,7 @@ extension Int {
             
         }
         
-        return "$\(moneyString)"
+        return "$\(moneyString)\(decimals ?? "")\(suffix ?? "")"
     }
 }
 

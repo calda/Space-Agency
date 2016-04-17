@@ -18,7 +18,7 @@ func displayBuyControllerForItem(item: Item, inController controller: UIViewCont
     return textController
 }
 
-class PurchaseViewController : UIViewController {
+class PurchaseViewController : UIViewController, TickListener {
     
     @IBOutlet weak var popup: UIView!
     @IBOutlet weak var popupCenter: NSLayoutConstraint!
@@ -69,7 +69,11 @@ class PurchaseViewController : UIViewController {
         countLabel.text = "\(count)"
         
         lessButton.enabled = (count != 1)
-        moreButton.enabled = (((count + 1) * item.price) < SABalance) && count < 100
+        moreButton.enabled = (((count + 1) * item.price) <= SABalance) && count < 100
+    }
+    
+    func tick() {
+        updateLabels()
     }
     
     //MARK: - Interaction
