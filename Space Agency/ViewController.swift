@@ -9,8 +9,8 @@
 import UIKit
 
 //MARK: Game Variables
-var SABalance = 100
-var SAIncome = 0
+var SABalance: Double = 100
+var SAIncome: Double = 0
 
 protocol TickListener {
     func tick()
@@ -26,6 +26,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        let welcomeText = "You've always dreamed of the stars, but never known how to get there. Your government gives you a $100 grant with the expectation that you can do great things."
+        
+        delay(0.5) {
+            self.controllerToRetain = displayTextControllerForText(welcomeText, title: "Space Agency", buttonText: "Get Started", inController: self, completion: nil)
+        }
     }
     
     override func viewDidLoad() {
@@ -94,8 +103,11 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             self.controllerToRetain = nil
             
             let cost = count * item.price
-            if SABalance < cost { return } //TODO: throw some error
+            if SABalance < cost { return }
             SABalance -= cost
+            
+            //endgame surprise
+            if count > 0 && item.name == "Martian Colony" { item.income = 0 }
             
             let newIncome = count * item.income
             SAIncome += newIncome
@@ -148,8 +160,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        let width = (UIScreen.mainScreen().bounds.width / 2) - 15
-        return CGSizeMake(width, width)
+        var height = (UIScreen.mainScreen().bounds.width / 2) - 15
+        if height > 250 {
+            height = (UIScreen.mainScreen().bounds.width / 3) - 15
+        }
+        
+        //make last element the width of the table view
+        if indexPath.item == (SAItems.count - 1) {
+            return CGSizeMake(UIScreen.mainScreen().bounds.width - 20, height + 5)
+        }
+        
+        return CGSizeMake(height, height + 5)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
@@ -177,7 +198,13 @@ class ItemCell : UICollectionViewCell {
     
     func decorateForItem(item: Item) {
         self.item = item
-        image.image = UIImage(named: item.name)
+        
+        if item.image == nil {
+            //cache item's image inside object
+            item.image = UIImage(named: item.name)
+        }
+        
+        image.image = item.image
         updateLabels()
         
         self.layer.borderColor = UIColor.lightGrayColor().CGColor
@@ -191,8 +218,7 @@ class ItemCell : UICollectionViewCell {
         nameLabel.text = item.name
         
         subtitleLabel.text = "\(item.price.formatedAsMoney()) for \(item.income.formatedAsMoney())/day"
-        countLabel.text = "x\(item.count)"
+        countLabel.text = "x\(item.count.intString())"
     }
     
 }
-

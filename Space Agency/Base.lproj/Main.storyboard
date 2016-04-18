@@ -113,6 +113,7 @@
                                                     </constraints>
                                                     <variation key="default">
                                                         <mask key="constraints">
+                                                            <exclude reference="FYE-rP-xuj"/>
                                                             <exclude reference="vUM-R1-lqS"/>
                                                         </mask>
                                                     </variation>
@@ -120,9 +121,12 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JkH-na-bX7" userLabel="header bg">
                                                     <rect key="frame" x="0.0" y="0.0" width="199" height="42"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="42" id="vwG-Z9-azl"/>
+                                                    </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Mission to Mars" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="JlL-JH-C62">
-                                                    <rect key="frame" x="18" y="7" width="163" height="28"/>
+                                                    <rect key="frame" x="8" y="7" width="183" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="29" id="dPL-Nu-izV"/>
                                                     </constraints>
@@ -155,7 +159,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.50385237068965516" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="$100 for $10 per second" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o2J-jQ-rSM">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="$100 for $10 per second" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o2J-jQ-rSM">
                                                     <rect key="frame" x="10" y="171" width="179" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.61791487068965523" colorSpace="calibratedRGB"/>
@@ -184,8 +188,8 @@
                                             <constraint firstAttribute="trailing" secondItem="cKY-vi-Rwg" secondAttribute="trailing" constant="5" id="DQF-Bx-yIq"/>
                                             <constraint firstAttribute="trailing" secondItem="JkH-na-bX7" secondAttribute="trailing" id="FJZ-4z-J8w"/>
                                             <constraint firstItem="WVp-v0-jQj" firstAttribute="height" secondItem="o2J-jQ-rSM" secondAttribute="height" multiplier="1.5" id="GfC-nJ-VaN"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="JlL-JH-C62" secondAttribute="trailing" constant="10" id="Ohi-3K-4XH"/>
-                                            <constraint firstItem="JlL-JH-C62" firstAttribute="leading" secondItem="pGb-6j-jOO" secondAttribute="leadingMargin" constant="10" id="Oog-qg-3yH"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="JlL-JH-C62" secondAttribute="trailing" id="Ohi-3K-4XH"/>
+                                            <constraint firstItem="JlL-JH-C62" firstAttribute="leading" secondItem="pGb-6j-jOO" secondAttribute="leadingMargin" id="Oog-qg-3yH"/>
                                             <constraint firstAttribute="bottom" secondItem="o2J-jQ-rSM" secondAttribute="bottom" constant="12" id="POQ-K0-bSh"/>
                                             <constraint firstItem="WVp-v0-jQj" firstAttribute="leading" secondItem="pGb-6j-jOO" secondAttribute="leading" id="Psb-GP-vJe"/>
                                             <constraint firstAttribute="trailing" secondItem="WVp-v0-jQj" secondAttribute="trailing" id="Qal-Hj-G46"/>

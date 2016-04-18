@@ -8,7 +8,7 @@
 
 import UIKit
 
-func displayBuyControllerForItem(item: Item, inController controller: UIViewController, atOffset offset: CGFloat, completion: ((count: Int, item: Item) -> ())?) -> UIViewController {
+func displayBuyControllerForItem(item: Item, inController controller: UIViewController, atOffset offset: CGFloat, completion: ((count: Double, item: Item) -> ())?) -> UIViewController {
     
     let textController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("buy") as! PurchaseViewController
     textController.loadView()
@@ -29,13 +29,13 @@ class PurchaseViewController : UIViewController, TickListener {
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var scrim: UIView!
     
-    var count = 1
+    var count: Double = 1
     var item: Item = SAItems[1]
-    var completion: ((count: Int, item: Item) -> ())?
+    var completion: ((count: Double, item: Item) -> ())?
     
     //MARK: - Setup
     
-    func displayForItem(item: Item, inController controller: UIViewController, atOffset offset: CGFloat, completion: ((count: Int, item: Item) -> ())?) {
+    func displayForItem(item: Item, inController controller: UIViewController, atOffset offset: CGFloat, completion: ((count: Double, item: Item) -> ())?) {
         
         self.item = item
         self.popup.hidden = false
@@ -66,7 +66,7 @@ class PurchaseViewController : UIViewController, TickListener {
         let income = count * item.income
         let text = "\(price.formatedAsMoney()) for \(income.formatedAsMoney())/day"
         costLabel.text = text
-        countLabel.text = "\(count)"
+        countLabel.text = "\(count.intString())"
         
         lessButton.enabled = (count != 1)
         moreButton.enabled = (((count + 1) * item.price) <= SABalance) && count < 100
@@ -80,7 +80,7 @@ class PurchaseViewController : UIViewController, TickListener {
     
     @IBAction func offsetCount(sender: UIButton) {
         let offset = sender.tag
-        count += offset
+        count += Double(offset)
         updateLabels()
         
         //animate
@@ -89,7 +89,7 @@ class PurchaseViewController : UIViewController, TickListener {
     }
     
     @IBAction func completePurchase(sender: UIButton) {
-        let multiplier = sender.tag
+        let multiplier = Double(sender.tag)
         count *= multiplier
         completion?(count: count, item: item)
         

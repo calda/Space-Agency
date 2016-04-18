@@ -547,15 +547,27 @@ extension Int {
         else if length == 2 { return "0\(start)" }
         else { return start }
     }
+}
+
+extension Double {
+    
+    //truncates the decimal without sacraficing precision by casting to an Int
+    func intString() -> String {
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        let string = formatter.stringFromNumber(self)! as NSString
+        return string.stringByReplacingOccurrencesOfString(",", withString: "")
+    }
     
     func formatedAsMoney() -> String {
-        var numberString = "\(self)" as NSString
+        
+        var numberString = self.intString() as NSString
         var suffix: String? = nil
         var decimals: String? = nil
         
         //add a suffix if the number is greater than a million
         if numberString.length > 6 {
-            let endings = ["k", "m", "b", "tr", "mb", "bb", "trb", "mtr", "btr", "trtr"]
+            let endings = ["k", "m", "b", "tr", "quad", "bb", "trb", "mtr", "btr", "trtr"]
             
             var currentSuffix = 0
             while numberString.length > 3 {
@@ -568,7 +580,7 @@ extension Int {
         //add back a decimal so the text is atleast 4 digits long
         if (suffix != nil) {
             let newLength = numberString.length
-            var decimalStr = (("\(self)" as NSString).substringFromIndex(newLength) as NSString).substringToIndex(4 - numberString.length)
+            var decimalStr = ((self.intString() as NSString).substringFromIndex(newLength) as NSString).substringToIndex(4 - numberString.length)
             
             //remove trailing 0s
             while decimalStr != "0" && "\(decimalStr.characters.last!)" == "0" {
